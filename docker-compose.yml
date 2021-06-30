@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  db:
+    container_name: postgis
+    image: kartoza/postgis:12.0
+    ports:
+      - '5432:5432'
+    environment:
+      - PGDATA=/data/pgdata
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASS=postgres
+      - POSTGRES_DBNAME=map_rookie
+      - ALLOW_IP_RANGE=0.0.0.0/0
+    volumes:
+      - ./db/data:/data

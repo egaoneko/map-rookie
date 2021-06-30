@@ -112,3 +112,7 @@ lib
 
 # webpack 5
 .cache
+
+# db
+db/
+data/
