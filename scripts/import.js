@@ -62,7 +62,7 @@ async function insertRow(client, data) {
   const values = [
     `'${data['name']}'`,
     `'${data['address']}'`,
-    `ST_GeomFromText('POINT(${data['longitude']} ${data['latitude']})', 4326)`,
+    `st_transform(ST_GeomFromText('POINT(${data['longitude']} ${data['latitude']})',4326),3857)`,
     `'${data['source']}'`,
   ];
 
@@ -72,7 +72,7 @@ async function insertRow(client, data) {
   try {
     await client.query(insertQuery);
   } catch (e) {
-    console.log(`query : ${insertQuery}\n`);
+    console.log(`[error] query : ${insertQuery}\n`);
   }
 }
 

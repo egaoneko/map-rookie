@@ -2,11 +2,7 @@ import React, { FC, useState } from 'react';
 import SEO from '@components/organisms/common/SEO';
 import HomeTemplate from '../../templates/layout/HomeTemplate';
 import MapView, { MapViewPropsType } from '@components/atoms/view/MapView';
-import {
-  Layer,
-  LayerProps,
-  Source
-} from 'react-map-gl';
+import { Layer, LayerProps, Source } from 'react-map-gl';
 import { FeatureCollection } from 'geojson';
 
 interface PropsType {}
@@ -17,7 +13,7 @@ const MainHomePage: FC<PropsType> = props => {
     height: '100%',
     longitude: 126.9783882,
     latitude: 37.5666103,
-    zoom: 17,
+    zoom: 11,
   });
 
   return (
@@ -29,10 +25,29 @@ const MainHomePage: FC<PropsType> = props => {
           onViewportChange={nextViewport => setViewport(nextViewport)}
           {...viewport}
         >
-          <Source id="my-data" type="geojson" data={geojson}>
-            <Layer {...pointStyle} />
-            <Layer {...lineStyle} />
-            <Layer {...fillStyle} />
+          <Source
+            id="map-rookie-source"
+            type="vector"
+            tiles={['http://localhost:3000/api/wmts/{z}/{x}/{y}']}
+            minzoom={1}
+            maxzoom={19}
+          >
+            <Layer
+              id="ctprvn"
+              source-layer="ctprvn"
+              type="line"
+              paint={{
+                'line-color': '#007cbf',
+              }}
+            />
+            <Layer
+              id="charging_station"
+              source-layer="charging_station"
+              type="circle"
+              paint={{
+                'circle-color': '#ec1652',
+              }}
+            />
           </Source>
         </MapView>
       </HomeTemplate>

@@ -24,7 +24,7 @@ export PGPASSWORD=postgres
 export dbname=map_rookie
 
 psql -h $host -p $port -U $user -d $dbname -c 'SELECT postgis_version()'
-shp2pgsql -I -d -W EUC-KR -s 5179:4326 ./data/CTPRVN/TL_SCCO_CTPRVN.shp ctprvn | psql -h $host -p $port -U $user -d $dbname
+shp2pgsql -I -d -W EUC-KR -s 5179:3857 ./data/CTPRVN/TL_SCCO_CTPRVN.shp ctprvn | psql -h $host -p $port -U $user -d $dbname
 ```
 
 ## 자료
